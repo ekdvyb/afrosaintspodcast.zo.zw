@@ -1,1 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AfroSaints - Faith. Culture. Conversation.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        :root {
+            --primary-red: #DC2626;
+            --dark-red: #991B1B;
+            --light-red: #FCA5A5;
+            --black: #0A0A0A;
+            --dark-gray: #1A1A1A;
+            --medium-gray: #2A2A2A;
+            --light-gray: #A3A3A3;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-red);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-red);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--black) 0%, var(--dark-gray) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(220, 38, 38, 0.15) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--white), var(--light-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            font-size: 1.8rem;
+            color: var(--primary-red);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--light-gray);
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--primary-red);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--dark-red);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        /* Latest Episode Section */
+        .latest-episode {
+            padding: 6rem 2rem;
+            background: var(--dark-gray);
+        }
+
+        .section-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--primary-red);
+        }
+
+        .episode-player {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: var(--medium-gray);
+            border-radius: 16px;
+            border: 1px solid rgba(220, 38, 38, 0.2);
+        }
+
+        .player-placeholder {
+            aspect-ratio: 16/9;
+            background: var(--black);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-gray);
+            font-size: 1.2rem;
+        }
+
+        /* About Section */
+        .about {
+            padding: 6rem 2rem;
+            background: var(--black);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            color: var(--light-gray);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .about-image {
+            aspect-ratio: 1/1;
+            background: linear-gradient(135deg, var(--medium-gray), var(--dark-gray));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-gray);
+            font-size: 1.2rem;
+            border: 2px solid var(--primary-red);
+        }
+
+        /* Social Proof */
+        .social-proof {
+            padding: 4rem 2rem;
+            background: var(--medium-gray);
+        }
+
+        .social-proof-content {
+            text-align: center;
+        }
+
+        .guest-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .guest-card {
+            background: var(--dark-gray);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(220, 38, 38, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .guest-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.2);
+        }
+
+        .guest-card h3 {
+            color: var(--primary-red);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Episodes Grid */
+        .episodes {
+            padding: 6rem 2rem;
+            background: var(--black);
+        }
+
+        .episodes-filter {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.7rem 1.5rem;
+            background: var(--medium-gray);
+            color: var(--white);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary-red);
+            border-color: var(--primary-red);
+        }
+
+        .episodes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .episode-card {
+            background: var(--dark-gray);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--medium-gray);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .episode-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(220, 38, 38, 0.2);
+        }
+
+        .episode-thumbnail {
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, var(--medium-gray), var(--black));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-gray);
+        }
+
+        .episode-info {
+            padding: 1.5rem;
+        }
+
+        .episode-tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: rgba(220, 38, 38, 0.2);
+            color: var(--primary-red);
+            border-radius: 15px;
+            font-size: 0.85rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .episode-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .episode-description {
+            color: var(--light-gray);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .episode-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--light-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--dark-red), var(--black));
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter p {
+            color: var(--light-gray);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .newsletter-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            background: var(--medium-gray);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            border-radius: 8px;
+            color: var(--white);
+            font-size: 1rem;
+        }
+
+        .newsletter-input::placeholder {
+            color: var(--light-gray);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-gray);
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid var(--medium-gray);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-about h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-red);
+        }
+
+        .footer-about p {
+            color: var(--light-gray);
+            line-height: 1.8;
+        }
+
+        .footer-links h4 {
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: var(--light-gray);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.7rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-red);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--medium-gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 1px solid rgba(220, 38, 38, 0.3);
+        }
+
+        .social-icon:hover {
+            background: var(--primary-red);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--medium-gray);
+            color: var(--light-gray);
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .footer-bottom-links a {
+            color: var(--light-gray);
+            text-decoration: none;
+        }
+
+        .footer-bottom-links a:hover {
+            color: var(--primary-red);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .tagline {
+                font-size: 1.3rem;
+            }
+
+            .episodes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">AS</div>
+                AfroSaints
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#episodes">Episodes</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#community">Community</a></li>
+                <li><a href="#events">Events</a></li>
+                <li><a href="#merch">Merch</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content fade-in">
+            <h1>AfroSaints</h1>
+            <p class="tagline">Faith. Culture. Conversation.</p>
+            <p class="hero-description">
+                Bridging African spirituality, modern life, and the gospel through authentic conversations that spark change in the hearts of young believers.
+            </p>
+            <div class="cta-buttons">
+                <a href="#episodes" class="btn btn-primary">Listen Now</a>
+                <a href="#about" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Episode -->
+    <section class="latest-episode">
+        <div class="section-container">
+            <h2 class="section-title">Latest Episode</h2>
+            <div class="episode-player">
+                <div class="player-placeholder">
+                    🎙️ Spotify / YouTube Player Embed Here
+                </div>
+                <div class="episode-info" style="margin-top: 1.5rem;">
+                    <div class="episode-tag">Faith Talks</div>
+                    <h3 class="episode-title">Finding God in the Midst of Culture</h3>
+                    <p class="episode-description">
+                        Join us as we explore how young African believers navigate traditional culture while staying rooted in Christ.
+                    </p>
+                    <div class="episode-meta">
+                        <span>📅 Nov 1, 2025</span>
+                        <span>⏱️ 52 min</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="section-container">
+            <div class="about-content">
+                <div class="about-text fade-in">
+                    <h2>The AfroSaints Story</h2>
+                    <p>
+                        AfroSaints was born from a simple yet powerful question: How do young African believers reconcile their rich cultural heritage with their faith in Christ?
+                    </p>
+                    <p>
+                        We are more than a podcast—we're a movement. A space where faith meets culture, where tough questions are welcomed, and where the African Christian experience is celebrated and explored without shame or compromise.
+                    </p>
+                    <p>
+                        Through candid conversations, powerful testimonies, and deep spiritual insights, we're building a community that honors both our roots and our Savior.
+                    </p>
+                    <a href="#" class="btn btn-primary">Meet the Hosts</a>
+                </div>
+                <div class="about-image fade-in">
+                    📸 Behind the Scenes Photo
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="social-proof">
+        <div class="section-container">
+            <div class="social-proof-content">
+                <h2 class="section-title">Featured Conversations</h2>
+                <div class="guest-highlights">
+                    <div class="guest-card fade-in">
+                        <h3>Youth Leaders</h3>
+                        <p>Exploring generational gaps in African churches and how to bridge them with love and understanding.</p>
+                    </div>
+                    <div class="guest-card fade-in">
+                        <h3>Cultural Experts</h3>
+                        <p>Deep dives into African traditions and finding the gospel thread woven through our heritage.</p>
+                    </div>
+                    <div class="guest-card fade-in">
+                        <h3>Everyday Believers</h3>
+                        <p>Real stories from real people navigating faith, work, relationships, and purpose.</p>
+                    </div>
+                    <div class="guest-card fade-in">
+                        <h3>Theologians</h3>
+                        <p>Biblical perspectives on modern challenges facing African Christian youth today.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Episodes Section -->
+    <section class="episodes" id="episodes">
+        <div class="section-container">
+            <h2 class="section-title">Episode Library</h2>
+            <div class="episodes-filter">
+                <button class="filter-btn active">All Episodes</button>
+                <button class="filter-btn">Faith Talks</button>
+                <button class="filter-btn">Culture Clash</button>
+                <button class="filter-btn">Youth & Society</button>
+                <button class="filter-btn">Temple Conversations</button>
+            </div>
+            <div class="episodes-grid">
+                <div class="episode-card fade-in">
+                    <div class="episode-thumbnail">🎬 Episode Video</div>
+                    <div class="episode-info">
+                        <span class="episode-tag">Faith Talks</span>
+                        <h3 class="episode-title">Walking by Faith in Uncertain Times</h3>
+                        <p class="episode-description">
+                            How do we trust God when we can't see the path ahead? A conversation on faith, fear, and finding peace.
+                        </p>
+                        <div class="episode-meta">
+                            <span>Oct 28, 2025</span>
+                            <span>45 min</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="episode-card fade-in">
+                    <div class="episode-thumbnail">🎬 Episode Video</div>
+                    <div class="episode-info">
+                        <span class="episode-tag">Culture Clash</span>
+                        <h3 class="episode-title">Ancestors and the Gospel</h3>
+                        <p class="episode-description">
+                            Navigating the tension between honoring our ancestors and worshiping Christ alone.
+                        </p>
+                        <div class="episode-meta">
+                            <span>Oct 21, 2025</span>
+                            <span>58 min</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="episode-card fade-in">
+                    <div class="episode-thumbnail">🎬 Episode Video</div>
+                    <div class="episode-info">
+                        <span class="episode-tag">Youth & Society</span>
+                        <h3 class="episode-title">Purpose Beyond Hustle Culture</h3>
+                        <p class="episode-description">
+                            Finding your God-given purpose in a world obsessed with productivity and success.
+                        </p>
+                        <div class="episode-meta">
+                            <span>Oct 14, 2025</span>
+                            <span>50 min</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="episode-card fade-in">
+                    <div class="episode-thumbnail">🎬 Episode Video</div>
+                    <div class="episode-info">
+                        <span class="episode-tag">Temple Conversations</span>
+                        <h3 class="episode-title">Prayer: More Than Words</h3>
+                        <p class="episode-description">
+                            Unlocking the power of authentic prayer and developing a real conversation with God.
+                        </p>
+                        <div class="episode-meta">
+                            <span>Oct 7, 2025</span>
+                            <span>42 min</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="episode-card fade-in">
+                    <div class="episode-thumbnail">🎬 Episode Video</div>
+                    <div class="episode-info">
+                        <span class="episode-tag">Culture Clash</span>
+                        <h3 class="episode-title">Love, Dating & Lobola</h3>
+                        <p class="episode-description">
+                            Biblical perspectives on relationships, marriage customs, and honoring God in courtship.
+                        </p>
+                        <div class="episode-meta">
+                            <span>Sep 30, 2025</span>
+                            <span>55 min</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="episode-card fade-in">
+                    <div class="episode-thumbnail">🎬 Episode Video</div>
+                    <div class="episode-info">
+                        <span class="episode-tag">Faith Talks</span>
+                        <h3 class="episode-title">The Power of Testimony</h3>
+                        <p class="episode-description">
+                            Why your story matters and how sharing it can transform lives in your community.
+                        </p>
+                        <div class="episode-meta">
+                            <span>Sep 23, 2025</span>
+                            <span>48 min</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="section-container">
+            <h2>Join the Tribe</h2>
+            <p>Get weekly inspiration, episode updates, and exclusive content delivered to your inbox.</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="section-container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3>AfroSaints</h3>
+                    <p>
+                        A podcast movement bridging African spirituality, modern life, and the gospel through authentic conversations. Join us every week for real talk, deep faith, and cultural exploration.
+                    </p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon">📷</a>
+                        <a href="#" class="social-icon">▶️</a>
+                        <a href="#" class="social-icon">🐦</a>
+                        <a href="#" class="social-icon">📱</a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#episodes">Episodes</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Get Involved</h4>
+                    <ul>
+                        <li><a href="#community">Community</a></li>
+                        <li><a href="#events">Events</a></li>
+                        <li><a href="#">Be a Guest</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#merch">Merch Store</a></li>
+                        <li><a href="#">Video Hub</a></li>
+                        <li><a href="#">Support Us</a></li>
+                        <li><a href="#">Newsletter</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AfroSaints. All rights reserved. Faith. Culture. Conversation.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Use</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
